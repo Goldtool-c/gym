@@ -7,6 +7,12 @@
 <body>
 <!--/*@thymesVar id="member" type="by.gladyshev.gym.entity.Member"*/-->
 <a th:text="${member.getName()} +' '+ ${member.getRole()} ">VALUE</a>
+<div th:each="membership:${member.getMemberships()}">
+    <a th:href="@{/membership/{id}(id=${membership.getId()})}" th:if="${membership.isRelevant()}"
+       th:text="${membership.getId()}+' is relevant'"></a>
+    <a th:href="@{/membership/{id}(id=${membership.getId()})}" th:unless="${membership.isRelevant()}"
+       th:text="${membership.getId()}+' isn\'t relevant'"></a>
+</div>
 <br>
 <form th:method="POST" th:action="@{/delete/{id}(id=${member.getId()})}">
 <input type="submit" value="DELETE"/>

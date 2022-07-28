@@ -15,5 +15,5 @@ public class Member implements Entity {
     private String name;
     private String password;
     private MemberRole role;
-    private ArrayList<Integer> memberships = new ArrayList<>();
+    private ArrayList<Membership> memberships = new ArrayList<>();
 }
