@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${member.getName()}">Title</title>
+</head>
+<body>
+<!--/*@thymesVar id="member" type="by.gladyshev.gym.entity.Member"*/-->
+<a th:text="${member.getName()} +' '+ ${member.getRole()} ">VALUE</a>
+<br>
+<form th:method="POST" th:action="@{/delete/{id}(id=${member.getId()})}">
+<input type="submit" value="DELETE"/>
+</form>
+</body>
+</html>

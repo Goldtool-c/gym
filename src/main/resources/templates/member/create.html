@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New member</title>
+</head>
+<body>
+<!--/*@thymesVar id="member" type="by.gladyshev.gym.entity.Member"*/-->
+<form th:method="POST" th:action="@{/create}" th:object="${member}">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <!--<div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>-->
+    <select th:field="*{role}">
+        <!--/*@thymesVar id="MemberRole" type="by.gladyshev.gym.entity.MemberRole"*/-->
+        <option th:each="rolee:${T(by.gladyshev.gym.entity.MemberRole).values()}"
+                th:value="${rolee}" th:text="${rolee}"></option>
+    </select>
+    <br/>
+    <input type="submit" value="Create!"/>
+</form>
+</body>
+</html>

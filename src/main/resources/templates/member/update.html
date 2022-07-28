@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <!--/*@thymesVar id="member" type="by.gladyshev.gym.entity.Member"*/-->
+    <title th:text="${member.getName()}">VALUE</title>
+</head>
+<body>
+<!--/*@thymesVar id="member" type="by.gladyshev.gym.entity.Member"*/-->
+<form th:method="POST" th:action="@{/update/{id}(id=${member.getId()})}" th:object="${member}">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br>
+    <label for="role">Select role: </label>
+    <select th:field="*{role}" id="role">
+    <!--/*@thymesVar id="MemberRole" type="by.gladyshev.gym.entity.MemberRole"*/-->
+    <option th:each="rolee:${T(by.gladyshev.gym.entity.MemberRole).values()}"
+            th:value="${rolee}" th:text="${rolee}"></option>
+    </select>
+    <br/>
+    <input type="submit" value="UPDATE!"/>
+</form>
+</body>
+</html>

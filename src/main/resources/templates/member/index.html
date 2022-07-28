@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Members</title>
+    <link rel="stylesheet" type="text/css" th:href="@{css/tableStyle.css}"/>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Role</th>
+    </tr>
+    <!--/*@thymesVar id="members" type="java.util.List<by.gladyshev.gym.entity.Member>"*/-->
+    <div th:each="member:${members}">
+        <tr>
+            <td><a th:href="@{/{id}(id=${member.getId()})}" th:text="${member.getName()}">VALUE</a></td>
+            <td><a th:href="@{/{id}(id=${member.getId()})}" th:text="${member.getRole().name()}">VALUE</a></td>
+
+        </tr>
+    </div>
+</table>
+<a th:href="@{/create}">Create new member</a>
+</body>
+</html>
