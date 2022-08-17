@@ -21,6 +21,8 @@ public class MembershipMapper implements RowMapper<Membership> {
         membership.setFrom(parseDate(rs.getString("fromdate")));
         membership.setTo(parseDate(rs.getString("todate")));
         membership.setVisitNumber(rs.getInt("visits"));
+        membership.setOwner(rs.getInt("owner"));
+        membership.setLastVisit(rs.getLong("last_visit"));
         return membership;
     }
     private Date parseDate(String content)

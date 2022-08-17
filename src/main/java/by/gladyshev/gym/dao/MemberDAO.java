@@ -11,6 +11,7 @@ public class MemberDAO extends DAO{
 
     public MemberDAO(@Autowired JdbcTemplate jdbcTemplate, @Autowired MemberMapper rm) {
         super(jdbcTemplate);
+        //if table name changes, also change it in MembershipDAO.create
         this.table = "members";
         this.rm = rm;
     }
@@ -32,6 +33,12 @@ public class MemberDAO extends DAO{
     public void delete(int id)
     {
         jdbcTemplate.update("DELETE FROM "+table+" WHERE id = ?", id);
+    }
+
+    public Entity findByName(String name)
+    {
+        return (Entity) jdbcTemplate.query("SELECT * FROM " + table + " WHERE name =?", new Object[]{name}, rm)
+                .stream().findAny().orElse(null);
     }
 
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Table;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,6 +19,8 @@ public class Membership implements Entity {
     private Date from;
     private Date to;
     private int visitNumber;
+    private int owner = 0;
+    private long lastVisit=0;
 
     public String getToDateFormat()
     {
@@ -44,6 +47,7 @@ public class Membership implements Entity {
         {
             visitNumber--;
         }
+        lastVisit = new Date().getTime();
         //todo log
     }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Members</title>
-    <link rel="stylesheet" type="text/css" th:href="@{css/tableStyle.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tableStyle.css}"/>
 </head>
 <body>
 <table>
@@ -16,10 +16,14 @@
         <tr>
             <td><a th:href="@{/{id}(id=${member.getId()})}" th:text="${member.getName()}">VALUE</a></td>
             <td><a th:href="@{/{id}(id=${member.getId()})}" th:text="${member.getRole().name()}">VALUE</a></td>
-
         </tr>
     </div>
 </table>
+<a th:if="${page}>1" th:href="@{/page/{id}(id = ${page}-1)}"><button><</button></a>
+<a th:text="${page}">VALUE</a>
+<a th:if="${page}!=${maxPage}" th:text="' ... '+${maxPage}">VALUE</a>
+<a th:if="${page}<${maxPage}" th:href="@{/page/{id}(id = ${page}+1)}"> <button>></button> </a>
+<br>
 <a th:href="@{/create}">Create new member</a>
 </body>
 </html>

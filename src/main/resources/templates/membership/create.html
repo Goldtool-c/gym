@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--/*@thymesVar id="membership" type="by.gladyshev.gym.form.MembershipForm"*/-->
+<form th:method="POST" th:action="@{/membership/create/{id}(id=${id})}" th:object="${membership}">
+    <label for="dateFrom">Enter start date: </label>
+    <input type="text" th:field="*{dateFrom}" id="dateFrom"/>
+    <br>
+    <label for="type">Select type: </label>
+    <select th:field="*{type}" id="type">
+        <!--/*@thymesVar id="rolee" type="by.gladyshev.gym.entity.MembershipType"*/-->
+        <option th:each="typee:${T(by.gladyshev.gym.entity.MembershipType).values()}"
+                th:value="${typee}" th:text="${typee}"></option>
+    </select>
+    <br>
+    <label for="period">Select period: </label>
+    <select th:field="*{period}" id="period">
+        <option th:each="periode:${T(by.gladyshev.gym.entity.MembershipPeriod).values()}"
+                th:value="${periode}" th:text="${periode}"></option>
+    </select>
+    <br>
+    <label for="visit">Select visits: </label>
+    <select th:field="*{visits}" id="visit">
+        <option th:each="visite:${T(by.gladyshev.gym.entity.MembershipVisit).values()}"
+                th:value="${visite}" th:text="${visite}"></option>
+    </select>
+    <br>
+    <input type="submit" value="BUY!"/>
+</form>
+</body>
+</html>

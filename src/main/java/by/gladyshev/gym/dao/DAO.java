@@ -30,7 +30,7 @@ public class DAO {
      {
          return jdbcTemplate.query("select * from "+table, rm);
      }
-     protected Integer getID()
+     public Integer getID()
      {
          Integer id = jdbcTemplate.queryForObject("SELECT MAX(id) FROM " + table, Integer.class);
          if(id==null)

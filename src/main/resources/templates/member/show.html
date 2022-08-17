@@ -14,6 +14,7 @@
        th:text="${membership.getId()}+' isn\'t relevant'"></a>
 </div>
 <br>
+<a th:href="@{/membership/create/{id}(id=${member.getId()})}">BUY MEMBERSHIP</a>
 <form th:method="POST" th:action="@{/delete/{id}(id=${member.getId()})}">
 <input type="submit" value="DELETE"/>
 </form>
