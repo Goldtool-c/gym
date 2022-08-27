@@ -3,20 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="${member.getName()}">Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
 </head>
+<style>
+    body { background: url("/img/background.jpg") no-repeat; background-size: 100%;}
+</style>
 <body>
-<!--/*@thymesVar id="member" type="by.gladyshev.gym.entity.Member"*/-->
-<a th:text="${member.getName()} +' '+ ${member.getRole()} ">VALUE</a>
-<div th:each="membership:${member.getMemberships()}">
-    <a th:href="@{/membership/{id}(id=${membership.getId()})}" th:if="${membership.isRelevant()}"
-       th:text="${membership.getId()}+' is relevant'"></a>
-    <a th:href="@{/membership/{id}(id=${membership.getId()})}" th:unless="${membership.isRelevant()}"
-       th:text="${membership.getId()}+' isn\'t relevant'"></a>
-</div>
-<br>
-<a th:href="@{/membership/create/{id}(id=${member.getId()})}">BUY MEMBERSHIP</a>
-<form th:method="POST" th:action="@{/delete/{id}(id=${member.getId()})}">
-<input type="submit" value="DELETE"/>
-</form>
+<header class="header">
+    <button class="headerButton">Главная</button>
+    <a href="/guest/trainers"><button class="headerButton">Наши тренера</button></a>
+    <button class="headerButton">Price List</button>
+    <a th:unless="${userId}==0" th:href="@{/member/{id}(id = ${userId})}">
+        <button class="headerButton">My Page</button> </a>
+    <a th:href="@{/login}" th:unless="${T(by.gladyshev.gym.util.IsUserAuthenticated).isAuth()}">
+        <button class="login">Log In</button></a>
+    <a th:href="@{/logout}" th:if="${T(by.gladyshev.gym.util.IsUserAuthenticated).isAuth()}">
+        <button class="login">Log out</button> </a>
+</header>
+<article><h1><i><font size="32px" color="#f0f8ff">
+    <!--/*@thymesVar id="member" type="by.gladyshev.gym.entity.Member"*/-->
+    <a th:text="${member.getName()} +' '+ ${member.getRole()} ">VALUE</a>
+    <div th:each="membership:${member.getMemberships()}">
+        <a th:href="@{/membership/{id}(id=${membership.getId()})}" th:if="${membership.isRelevant()}"
+           th:text="${membership.getId()}+' is relevant'"></a>
+        <a th:href="@{/membership/{id}(id=${membership.getId()})}" th:unless="${membership.isRelevant()}"
+           th:text="${membership.getId()}+' isn\'t relevant'"></a>
+    </div>
+    <br>
+    <a th:if="${authUser.getRole().name()}=='ADMIN'" th:href="@{/membership/create/{id}(id=${member.getId()})}">BUY MEMBERSHIP</a>
+    <form th:method="POST" th:action="@{/member/delete/{id}(id=${member.getId()})}">
+    <input type="submit" value="DELETE"/>
+    </form>
+</font></i></h1></article>
 </body>
 </html>

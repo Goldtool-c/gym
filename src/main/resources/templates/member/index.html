@@ -6,6 +6,11 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/tableStyle.css}"/>
 </head>
 <body>
+<form th:method="POST" th:action="@{/member/search}" th:object="${searchForm}">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <input type="submit" value="search">
+</form>
 <table>
     <tr>
         <th>Name</th>
@@ -14,16 +19,16 @@
     <!--/*@thymesVar id="members" type="java.util.List<by.gladyshev.gym.entity.Member>"*/-->
     <div th:each="member:${members}">
         <tr>
-            <td><a th:href="@{/{id}(id=${member.getId()})}" th:text="${member.getName()}">VALUE</a></td>
-            <td><a th:href="@{/{id}(id=${member.getId()})}" th:text="${member.getRole().name()}">VALUE</a></td>
+            <td><a th:href="@{/member/{id}(id=${member.getId()})}" th:text="${member.getName()}">VALUE</a></td>
+            <td><a th:href="@{/member/{id}(id=${member.getId()})}" th:text="${member.getRole().name()}">VALUE</a></td>
         </tr>
     </div>
 </table>
-<a th:if="${page}>1" th:href="@{/page/{id}(id = ${page}-1)}"><button><</button></a>
+<a th:if="${page}>1" th:href="@{/member/page/{id}(id = ${page}-1)}"><button><</button></a>
 <a th:text="${page}">VALUE</a>
 <a th:if="${page}!=${maxPage}" th:text="' ... '+${maxPage}">VALUE</a>
-<a th:if="${page}<${maxPage}" th:href="@{/page/{id}(id = ${page}+1)}"> <button>></button> </a>
+<a th:if="${page}<${maxPage}" th:href="@{/member/page/{id}(id = ${page}+1)}"> <button>></button> </a>
 <br>
-<a th:href="@{/create}">Create new member</a>
+<a th:href="@{/member/create}">Create new member</a>
 </body>
 </html>

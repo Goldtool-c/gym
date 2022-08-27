@@ -2,6 +2,7 @@ package by.gladyshev.gym.dao;
 
 import by.gladyshev.gym.entity.Member;
 import by.gladyshev.gym.entity.impl.Entity;
+import by.gladyshev.gym.exception.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -16,9 +17,12 @@ public class MemberDAO extends DAO{
         this.rm = rm;
     }
     @Override
-    public void create(Entity entity)
-    {
+    public void create(Entity entity) throws UserAlreadyExistsException {
         Member member = (Member) entity;
+        Member member1 = (Member) findByName(member.getName());
+        if(member1!=null){
+            throw new UserAlreadyExistsException("User "+member.getName()+"alresdy exisits");
+        }
         int id = getID();
         jdbcTemplate.update("INSERT INTO "+table+" values(?,?,?,?)",++id, member.getName(),
                 member.getPassword(), member.getRole().name());

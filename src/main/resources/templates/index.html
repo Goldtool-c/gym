@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Документ без названия</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+</head>
+<style>
+    body { background: url("/img/background.jpg") no-repeat; background-size: 100%;}
+</style>
+<body>
+<header class="header">
+    <a href="/"><button class="headerButton">Главная</button></a>
+    <a href="/guest/trainers"><button class="headerButton">Наши тренера</button></a>
+    <a href="/guest/pricelist"><button class="headerButton">Price List</button></a>
+    <a th:unless="${userId}==0" th:href="@{/member/{id}(id = ${userId})}">
+        <button class="headerButton">My Page</button> </a>
+    <a th:href="@{/login}" th:unless="${T(by.gladyshev.gym.util.IsUserAuthenticated).isAuth()}">
+        <button class="login">Log In</button></a>
+    <a th:href="@{/logout}" th:if="${T(by.gladyshev.gym.util.IsUserAuthenticated).isAuth()}">
+        <button class="login">Log out</button> </a>
+</header>
+<article>
+    <h1><i><font size="32px" color="#f0f8ff">
+        <a class="word" th:text="${mainText}">mainText</a>
+    </font></i></h1>
+</article>
+<footer></footer>
+</body>
+</html>

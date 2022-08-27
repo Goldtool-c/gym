@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tableStyle.css}"/>
+</head>
+<style>
+    body { background: url("/img/background.jpg") no-repeat; background-size: 100%;}
+</style>
+<body>
+<header class="header">
+    <button class="headerButton">Главная</button>
+    <a href="/guest/trainers"><button class="headerButton">Наши тренера</button></a>
+    <a href="/guest/pricelist"><button class="headerButton">Price List</button></a>
+    <a th:href="@{/login}" th:unless="${T(by.gladyshev.gym.util.IsUserAuthenticated).isAuth()}">
+        <button class="login">Log In</button></a>
+    <a th:href="@{/logout}" th:if="${T(by.gladyshev.gym.util.IsUserAuthenticated).isAuth()}">
+        <button class="login">Log out</button> </a>
+</header>
+<article>
+    <table>
+        <tr>
+            <th class="th">Name</th>
+            <th class="th">Role</th>
+            <th class="th">Description</th>
+            <th class="th">Photo</th>
+        </tr>
+        <!--/*@thymesVar id="trainers" type="java.util.List<by.gladyshev.gym.entity.Member>"*/-->
+        <div th:each="member:${trainers}">
+            <tr>
+                <td><a th:text="${member.getName()}">VALUE</a></td>
+                <td><a th:text="${member.getRole().name()}">VALUE</a></td>
+                <td><a class="word" th:text="${member.getDescription()}">VALUE</a></td>
+                <td><img th:src="@{/img/nudistCoach.jpg}"/></td>
+            </tr>
+        </div>
+    </table>
+</article>
+</body>
+</html>

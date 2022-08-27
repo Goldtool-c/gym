@@ -21,9 +21,9 @@
     </div>
 </div>
 <br>
-<a th:href="@{/{id}(id=${membership.getOwner()})}">Owner</a>
+<a th:href="@{/member/{id}(id=${membership.getOwner()})}">Owner</a>
 <br>
-<form th:method="POST" th:action="@{/membership/visit/{id}(id=${membership.getId()})}">
+<form th:if="${activeUser.getRole().name()}=='ADMIN'" th:method="POST" th:action="@{/membership/visit/{id}(id=${membership.getId()})}">
     <input type="submit" value="VISIT">
 </form>
 </body>

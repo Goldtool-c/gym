@@ -24,7 +24,8 @@ public class MemberMapper implements RowMapper<Member> {
         String password = rs.getString("password");
         MemberRole role = MemberRole.valueOf(rs.getString("role"));
         String membership = rs.getString("memberships");
-        return new Member(id, name, password, role, parseMemberShip(membership));
+        String description = rs.getString("description");
+        return new Member(id, name, password, role, parseMemberShip(membership), description);
     }
     private ArrayList<Membership> parseMemberShip(String content)
     {

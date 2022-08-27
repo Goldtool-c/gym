@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tableStyle.css}"/>
+</head>
+<style>
+    body { background: url("/img/background.jpg") no-repeat; background-size: 100%;}
+</style>
+<body>
+<header class="header">
+    <a href="/"><button class="headerButton">Главная</button></a>
+    <a href="/guest/trainers"><button class="headerButton">Наши тренера</button></a>
+    <a href="/guest/pricelist"><button class="headerButton">Price List</button></a>
+    <a th:unless="${userId}==0" th:href="@{/member/{id}(id = ${userId})}">
+        <button class="headerButton">My Page</button> </a>
+    <a th:href="@{/login}" th:unless="${T(by.gladyshev.gym.util.IsUserAuthenticated).isAuth()}">
+        <button class="login">Log In</button></a>
+    <a th:href="@{/logout}" th:if="${T(by.gladyshev.gym.util.IsUserAuthenticated).isAuth()}">
+        <button class="login">Log out</button> </a>
+</header>
+<article>
+    <table>
+        <tr>
+            <th>Period</th>
+            <th>4 visits</th>
+            <th>8 visits</th>
+            <th>12 visits</th>
+            <th>Unlimited</th>
+        </tr>
+        <tr>
+            <td>Month</td>
+            <!--/*@thymesVar id="price" type="by.gladyshev.gym.entity.PriceList"*/-->
+            <td><a th:text="${price.getMonth()[0]}"></a></td>
+            <td><a th:text="${price.getMonth()[1]}"></a></td>
+            <td><a th:text="${price.getMonth()[2]}"></a></td>
+            <td><a th:text="${price.getMonth()[3]}"></a></td>
+        </tr>
+        <tr>
+            <td>3 month</td>
+            <!--/*@thymesVar id="price" type="by.gladyshev.gym.entity.PriceList"*/-->
+            <td><a th:text="${price.getN3month()[0]}"></a></td>
+            <td><a th:text="${price.getN3month()[1]}"></a></td>
+            <td><a th:text="${price.getN3month()[2]}"></a></td>
+            <td><a th:text="${price.getN3month()[3]}"></a></td>
+        </tr>
+        <tr>
+            <td>Year</td>
+            <!--/*@thymesVar id="price" type="by.gladyshev.gym.entity.PriceList"*/-->
+            <td><a th:text="${price.getYear()[0]}"></a></td>
+            <td><a th:text="${price.getYear()[0]}"></a></td>
+            <td><a th:text="${price.getYear()[0]}"></a></td>
+            <td><a th:text="${price.getYear()[0]}"></a></td>
+    </table>
+</article>
+</body>
+</html>

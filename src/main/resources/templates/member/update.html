@@ -7,7 +7,7 @@
 </head>
 <body>
 <!--/*@thymesVar id="member" type="by.gladyshev.gym.entity.Member"*/-->
-<form th:method="POST" th:action="@{/update/{id}(id=${member.getId()})}" th:object="${member}">
+<form th:method="POST" th:action="@{/member/update/{id}(id=${member.getId()})}" th:object="${member}">
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name"/>
     <br>

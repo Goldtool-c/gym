@@ -1,6 +1,7 @@
 package by.gladyshev.gym.dao;
 
 import by.gladyshev.gym.entity.impl.Entity;
+import by.gladyshev.gym.exception.UserAlreadyExistsException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -15,8 +16,7 @@ public class DAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public void create(Entity entity)
-    {
+    public void create(Entity entity) throws UserAlreadyExistsException {
         jdbcTemplate.update("INSERT INTO "+table+" values (?)", entity.getId());
     }
 

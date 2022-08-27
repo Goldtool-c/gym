@@ -6,7 +6,7 @@
 </head>
 <body>
 <!--/*@thymesVar id="member" type="by.gladyshev.gym.entity.Member"*/-->
-<form th:method="POST" th:action="@{/create}" th:object="${member}">
+<form th:method="POST" th:action="@{/member/create}" th:object="${member}">
     <label for="name">Enter name: </label>
     <input type="text" th:field="*{name}" id="name"/>
     <!--<div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</div>-->
@@ -15,6 +15,8 @@
         <option th:each="rolee:${T(by.gladyshev.gym.entity.MemberRole).values()}"
                 th:value="${rolee}" th:text="${rolee}"></option>
     </select>
+    <label for="password">Enter password: </label>
+    <input type="text" th:field="*{password}" id="password"/>
     <br/>
     <input type="submit" value="Create!"/>
 </form>

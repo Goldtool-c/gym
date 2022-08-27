@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:object="${text}" th:method="POST" th:action="@{/admin/setMainText}">
+    <textarea rows="10" cols="100" th:field="*{text}"></textarea>
+    <input type="submit" value="UPDATE!">
+</form>
+</body>
+</html>
